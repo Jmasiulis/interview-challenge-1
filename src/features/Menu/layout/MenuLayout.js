@@ -1,10 +1,10 @@
 import React from 'react';
-import '../../utils/App.css';
-import MenuOptionsPanel from '../MenuOptionsPanel';
-import MenuPanel from '../MenuPanel';
-import items from '../../utils/items';
-import transformItems from '../../utils/transformItems';
-import Header from '../Header';
+import '../../../utils/App.css';
+import MenuOptionsPanel from '../panel/MenuOptionsPanel';
+import MenuPanel from '../panel/MenuPanel';
+import items from '../../../utils/items';
+import transformItems from '../../../utils/transformItems';
+import Header from '../components/Header';
 
 export default class MenuLayout extends React.Component {
   constructor() {

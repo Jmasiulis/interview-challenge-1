@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuItem from '../components/items/MenuItem';
+import MenuItem from '../items/MenuItem';
 
 export default function MenuOptionsPanel({ items, onRemoveItem }) {
   return <div className="col-8">

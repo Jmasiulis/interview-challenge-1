@@ -1,5 +1,5 @@
 import React from 'react';
-import OptionItem from './items/OptionItem';
+import OptionItem from '../items/OptionItem';
 
 export default function MenuOptionsPanel({ items, onSelectItem }) {
   return <div className="col-4">
