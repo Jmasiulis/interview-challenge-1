@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function MenuOptionsPanel() {
-  <div className="col-8">
+  return <div className="col-8">
     <h2>Menu preview</h2>
     <ul className="menu-preview">
       <li className="item">

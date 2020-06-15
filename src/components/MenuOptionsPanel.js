@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function MenuOptionsPanel() {
-  <div className="col-4">
+  return <div className="col-4">
     <ul className="item-picker">
     <li className="item">
       <h2>Dummy item</h2>
