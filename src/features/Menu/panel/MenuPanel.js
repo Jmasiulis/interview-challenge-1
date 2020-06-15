@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from '../items/MenuItem';
 
-export default function MenuOptionsPanel({ items, onRemoveItem }) {
+export default function MenuPanel({ items, onRemoveItem }) {
   return <div className="col-8">
     <h2>Menu preview</h2>
     <ul className="menu-preview">

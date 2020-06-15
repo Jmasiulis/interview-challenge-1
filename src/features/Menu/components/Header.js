@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({itemsCount, selectedDietaries}) {
+export default function Header({ itemsCount, selectedDietaries }) {
   return (
     <div className="menu-summary">
       <div className="container">
@@ -12,7 +12,7 @@ export default function Header({itemsCount, selectedDietaries}) {
             {selectedDietaries && Object.keys(selectedDietaries).map(dietaryKey => {
               const dietaryCount = selectedDietaries[dietaryKey];
               return (
-                <span>
+                <span key={dietaryKey}>
                   {dietaryCount}x 
                   <span className="dietary">{dietaryKey}</span>
                 </span>

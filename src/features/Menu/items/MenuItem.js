@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function OptionItem({ name, dietaries, id, onRemoveItem }) {
+export default function MenuItem({ name, dietaries, id, onRemoveItem }) {
   return (
     <li className="item">
       <h2>{name}</h2>
