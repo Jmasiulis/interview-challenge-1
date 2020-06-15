@@ -2,28 +2,83 @@ import React from 'react';
 import '../../utils/App.css';
 import MenuOptionsPanel from '../MenuOptionsPanel';
 import MenuPanel from '../MenuPanel';
+import items from '../../utils/items';
+import transformItems from '../../utils/transformItems';
+import Header from '../Header';
 
-export default function MenuLayout() {
-  return <div className="wrapper">
-    <div className="menu-summary">
-      <div className="container">
-        <div className="row">
-          <div className="col-6 menu-summary-left">
-            <span>5 items</span>
-          </div>
-          <div className="col-6 menu-summary-right">
-            6x <span className="dietary">ve</span>
-            4x <span className="dietary">v</span>
-            12x <span className="dietary">n!</span>
+export default class MenuLayout extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      selectedItemsCount: 0,
+      selectedDietaries: {},
+      selectedItems: {},
+      availableItems: transformItems(items)
+    };
+  }
+
+  handleItemSelect = ({ id, item }) => {
+    const {[id]: omit, ...items} = this.state.availableItems;
+    const dietaries = item.dietaries.reduce((agg, dietary) => {
+      if (!agg[dietary]) {
+        agg[dietary] = 0;
+      }
+
+      agg[dietary]++;
+
+      return agg;
+    }, this.state.selectedDietaries);
+
+
+    this.setState({
+      selectedItems: Object.assign(this.state.selectedItems, { [id]: item }),
+      availableItems: items,
+      selectedItemsCount: this.state.selectedItemsCount + 1,
+      selectedDietaries: dietaries
+    })
+  }
+
+  handleItemRemove = ({ id, item }) => {
+    const {[id]: omit, ...items} = this.state.selectedItems;
+    const dietaries = item.dietaries.reduce((agg, dietary) => {
+      agg[dietary]--;
+
+      if (agg[dietary] === 0) {
+        delete agg[dietary];
+      }
+
+      return agg;
+    }, this.state.selectedDietaries);
+
+    this.setState({
+      selectedItems: items,
+      availableItems: Object.assign(this.state.availableItems, { [id]: item }),
+      selectedItemsCount: this.state.selectedItemsCount - 1,
+      selectedDietaries: dietaries
+    })
+  }
+
+  render () {
+    const { availableItems, selectedItems, selectedItemsCount, selectedDietaries } = this.state;
+
+    return (
+      <div className="wrapper">
+        <Header 
+          itemsCount={selectedItemsCount}
+          selectedDietaries={selectedDietaries}
+        />
+        <div className="container menu-builder">
+          <div className="row">
+            <MenuOptionsPanel 
+              items={availableItems}
+              onSelectItem={this.handleItemSelect}
+            />
+            <MenuPanel
+              items={selectedItems}
+              onRemoveItem={this.handleItemRemove}/>
           </div>
         </div>
       </div>
-    </div>
-    <div className="container menu-builder">
-      <div className="row">
-        <MenuOptionsPanel />
-        <MenuPanel />
-      </div>
-    </div>
-  </div>
+    );
+  } 
 };
